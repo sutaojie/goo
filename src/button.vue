@@ -1,10 +1,15 @@
 <template>
-        <button class="g-button">提交</button>
+        <button class="g-button">
+            <g-icon v-if="icon" class="icon" :name="icon"></g-icon>
+            <slot></slot>
+        </button>
 </template>
 
 <script>
     export default {
-        name: "button"
+        props:{
+            icon:{}
+        }
     }
 </script>
 
@@ -13,6 +18,10 @@
         font-size:var(--font-size);
         height:var(--button-height);
         padding: 0 1em;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
         border-radius: var(--border-radius);
         border:1px solid var(--border-color);
         background: var(--button-bg);
