@@ -1,6 +1,7 @@
 <template>
-        <button class="g-button">
-            <g-icon v-if="icon" class="icon" :name="icon"></g-icon>
+        <button class="g-button" :class="{[`i-${iconPostion}`]:true}">
+            <g-icon v-if="icon" class="icon"
+                    :name="icon" ></g-icon>
             <div class="content">
                 <slot></slot>
             </div>
@@ -11,7 +12,14 @@
 <script>
     export default {
         props:{
-            icon:{}
+            icon:{},
+            iconPostion:{
+                type:String,
+                default:'left',
+                validator(value){
+                    return value === 'right' || value === 'left';
+                }
+            }
         }
     }
 </script>
@@ -42,6 +50,15 @@
         }
         > .icon{
             order: 1; margin-right: .3em;
+        }
+        &.i-right{
+            > .content{
+                order:1;
+            }
+            > .icon{
+                order: 2; margin-right: 0;
+                margin-left: .3em;
+            }
         }
     }
 </style>
