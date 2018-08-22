@@ -1,5 +1,6 @@
 <template>
         <button class="g-button" :class="{[`i-${iconPostion}`]:true}">
+            <g-icon class="loading" name="loading"></g-icon>
             <g-icon v-if="icon" class="icon"
                     :name="icon" ></g-icon>
             <div class="content">
@@ -60,5 +61,13 @@
                 margin-left: .3em;
             }
         }
+        @keyframes isLoading{
+            0%{transform:rotate(0deg)}
+            100%{transform:rotate(360deg)}
+        }
+        .loading{
+            animation: isLoading 1s infinite linear;
+        }
+
     }
 </style>
