@@ -1,7 +1,10 @@
 <template>
         <button class="g-button">
             <g-icon v-if="icon" class="icon" :name="icon"></g-icon>
-            <slot></slot>
+            <div class="content">
+                <slot></slot>
+            </div>
+
         </button>
 </template>
 
@@ -33,6 +36,12 @@
         }
         &:focus{
             outline: none;
+        }
+        > .content{
+            order:2;
+        }
+        > .icon{
+            order: 1; margin-right: .3em;
         }
     }
 </style>
