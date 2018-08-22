@@ -1,7 +1,5 @@
 <template>
-    <div class="button-wrapper">
-        <button>提交</button>
-    </div>
+        <button class="g-button">提交</button>
 </template>
 
 <script>
@@ -11,7 +9,21 @@
 </script>
 
 <style lang="scss" scoped>
-    .button-wrapper{
-        background-color: red;
+    .g-button{
+        font-size:var(--font-size);
+        height:var(--button-height);
+        padding: 0 1em;
+        border-radius: var(--border-radius);
+        border:1px solid var(--border-color);
+        background: var(--button-bg);
+        &:hover{
+            border-color: var(--border-color-hover);
+        }
+        &:active{
+            background-color: var(--button-active-bg);
+        }
+        &:focus{
+            outline: none;
+        }
     }
 </style>
