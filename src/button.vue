@@ -10,7 +10,7 @@
     }
 </script>
 
-<style type="scss" scoped>
+<style lang="scss" scoped>
     .button-wrapper{
         background-color: red;
     }
