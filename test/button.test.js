@@ -8,6 +8,7 @@ Vue.config.devtools = false
 describe('Button', () => {
     it('存在.', () => {
         expect(Button).to.be.ok
+
     })
     it('可以设置icon.', () => {
         const Constructor = Vue.extend(Button)
@@ -25,7 +26,7 @@ describe('Button', () => {
         const vm = new Constructor({
             propsData: {
                 icon: 'settings',
-                loading: true
+                isloading: true
             }
         }).$mount()
         const useElements = vm.$el.querySelectorAll('use')
@@ -54,7 +55,7 @@ describe('Button', () => {
         const vm = new Constructor({
             propsData: {
                 icon: 'settings',
-                iconPosition: 'right'
+                iconPostion: 'right'
             }
         }).$mount(div)
         const icon = vm.$el.querySelector('svg')
