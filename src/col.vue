@@ -42,7 +42,7 @@
     .col{
         background: #ccc;
         border: 1px solid red;
-        width: 50%;
+
         height: 20px;
         $class-prefix:col-;
         @for $n from 1 through 24 {
