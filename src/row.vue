@@ -41,6 +41,7 @@
     .row{
         background-color: coral;
         display: flex;
+        flex-wrap: wrap;
         &.align-left{
             justify-content: flex-start;
         }

@@ -8,7 +8,17 @@
 </template>
 
 <script>
-
+let validator = (value)=>{
+    if(!value){return false}
+    let keys = Object.keys(value)
+    let valid = true
+    keys.forEach((key)=>{
+        if(!['span','offset'].includes(key)){
+            valid = false
+        }
+    })
+    return valid
+}
     export default {
         props:{
             span:{
@@ -16,6 +26,14 @@
             },
             offset:{
                 type:[Number, String]
+            },
+            phone:{
+                type:Object,
+                validator,
+            },
+            ipad:{
+                type:Object,
+                validator,
             }
         },
         data(){
@@ -25,8 +43,13 @@
         },
         computed:{
             colClass(){
-                let {span, offset} = this
-                return [span && `col-${span}`, offset && `offset-${offset}`]
+                let {span, offset, phone, ipad} = this
+                return [
+                    span && `col-${span}`,
+                    offset && `offset-${offset}`,
+                    ... (phone ? [`col-phone-${phone.span}`] : []),
+                    ... (ipad ? [`col-ipad-${ipad.span}`] : [])
+                ]
             },
             colStyle(){
                 return {
@@ -56,6 +79,35 @@
                 margin-left:($n /24) * 100%
             }
         }
+        @media (max-width : 800px) {
+            $class-prefix:col-phone-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    width:($n /24) * 100%
+                }
+            }
+            $class-prefix:col-phone-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left:($n /24) * 100%
+                }
+            }
+        }
+        @media (max-width : 600px) {
+            $class-prefix:col-ipad-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    width:($n /24) * 100%
+                }
+            }
+            $class-prefix:col-ipad-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left:($n /24) * 100%
+                }
+            }
+        }
     }
+
 
 </style>
