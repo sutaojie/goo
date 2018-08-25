@@ -27,10 +27,6 @@ let validator = (value)=>{
             offset:{
                 type:[Number, String]
             },
-            phone:{
-                type:Object,
-                validator,
-            },
             ipad:{
                 type:Object,
                 validator,
@@ -59,7 +55,10 @@ let validator = (value)=>{
                 let webPageSize = this.webPageSize
                 return [
                     ...(webPageSize({span, offset})),
-                    ...(webPageSize(ipad,'ipad-'))
+                    ...(webPageSize(ipad,'ipad-')),
+                    ...(webPageSize(narrowPc,'narrow-pc-')),
+                    ...(webPageSize(pc,'pc-')),
+                    ...(webPageSize(widePc,'wide-pc-'))
                 ]
             },
             colStyle(){
