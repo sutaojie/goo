@@ -34,6 +34,18 @@ let validator = (value)=>{
             ipad:{
                 type:Object,
                 validator,
+            },
+            narrowPc:{
+                type:Object,
+                validator,
+            },
+            pc:{
+                type:Object,
+                validator,
+            },
+            widePc:{
+                type:Object,
+                validator,
             }
         },
         data(){
@@ -43,12 +55,11 @@ let validator = (value)=>{
         },
         computed:{
             colClass(){
-                let {span, offset, phone, ipad} = this
+                let {span, offset, ipad, narrowPc, pc, widePc} = this
+                let webPageSize = this.webPageSize
                 return [
-                    span && `col-${span}`,
-                    offset && `offset-${offset}`,
-                    ... (phone ? [`col-phone-${phone.span}`] : []),
-                    ... (ipad ? [`col-ipad-${ipad.span}`] : [])
+                    ...(webPageSize({span, offset})),
+                    ...(webPageSize(ipad,'ipad-'))
                 ]
             },
             colStyle(){
@@ -56,6 +67,15 @@ let validator = (value)=>{
                     paddingLeft:this.gutter/2 + 'px',
                     paddingRight:this.gutter/2 + 'px',
                 }
+            }
+        },
+        methods:{
+            webPageSize(obj, str=''){
+                if(!obj) return [];
+                let array =[]
+                obj.span ?  array.push( `col-${str}${obj.span}`) : ''
+                obj.offset ? array.push(`offset-${str}${obj.offset}`) : ''
+                return array
             }
         }
     }
@@ -79,31 +99,59 @@ let validator = (value)=>{
                 margin-left:($n /24) * 100%
             }
         }
-        @media (max-width : 800px) {
-            $class-prefix:col-phone-;
+        @media (min-width: 577px) {
+            $class-prefix: col-ipad-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
-                    width:($n /24) * 100%
+                    width: ($n / 24) * 100%;
                 }
             }
-            $class-prefix:col-phone-;
+            $class-prefix: offset-ipad-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
-                    margin-left:($n /24) * 100%
+                    margin-left: ($n / 24) * 100%;
                 }
             }
         }
-        @media (max-width : 600px) {
-            $class-prefix:col-ipad-;
+        @media (min-width: 769px){ // 770
+            $class-prefix: col-narrow-pc-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
-                    width:($n /24) * 100%
+                    width: ($n / 24) * 100%;
                 }
             }
-            $class-prefix:col-ipad-;
+            $class-prefix: offset-narrow-pc-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
-                    margin-left:($n /24) * 100%
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
+        }
+        @media (min-width: 993px) {
+            $class-prefix: col-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    width: ($n / 24) * 100%;
+                }
+            }
+            $class-prefix: offset-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
+        }
+        @media (min-width: 1201px) {
+            $class-prefix: col-wide-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    width: ($n / 24) * 100%;
+                }
+            }
+            $class-prefix: offset-wide-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
                 }
             }
         }
