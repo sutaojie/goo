@@ -32,15 +32,25 @@ new Vue({
         loading1:false,
         loading2:true,
         loading3:false,
-        message:''
+        message:'',
+
     },
     mounted(){
         // this.$toast(`<a href="http://qq.com">文字</a>`, {enableHtml:true})
     },
     methods:{
-         showToast(){
+         showToast1(){
+           this.showToast('top')
+         },
+        showToast2(){
+            this.showToast('middle')
+        },
+        showToast3(){
+            this.showToast('bottom')
+        },
+         showToast(position){
              this.$toast('余额不足，请及时充值!',{
-                 position:'bottom',
+                 position,
                  enableHtml:false,
                  closeButton:{
                      text:'充值',
