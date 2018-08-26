@@ -1,12 +1,52 @@
 <template>
     <div class="toast">
-        <slot></slot>
+        <slot v-if="!enableHtml"></slot>
+        <div v-else v-html="$slots.default[0]"></div>
+        <span class="close" v-if="closeButton" @click="close">{{closeButton.text}}</span>
     </div>
 </template>
 
 <script>
     export default {
         name: "toast",
+        props:{
+            closeButton:{
+                type:Object,
+                default(){
+                    return {
+                        text:'关闭',
+                    }
+                }
+            },
+            autoClose:{
+                type:Boolean,
+                default:true
+            },
+            autoCloseDelay:{
+                type:Number,
+                default:5
+            },
+            enableHtml:{
+                type:Boolean,
+                default:false
+            }
+        },
+        mounted(){
+            this.execAutoClose()
+        },
+        methods:{
+            close(){
+                this.$el.remove()
+                this.$destroy()
+            },
+            execAutoClose(){
+               if(this.autoClose){
+                   setTimeout(()=>{
+                       this.close()
+                   },this.autoCloseDelay * 1000)
+               }
+            }
+        }
     }
 </script>
 

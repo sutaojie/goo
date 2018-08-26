@@ -35,10 +35,11 @@ new Vue({
         message:''
     },
     mounted(){
+        // this.$toast(`<a href="http://qq.com">文字</a>`, {enableHtml:true})
+        this.$toast('文字')
     },
     methods:{
          showToast(){
-             this.$toast('我是 message')
         }
     }
 })
