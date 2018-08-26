@@ -36,7 +36,6 @@ new Vue({
     },
     mounted(){
         // this.$toast(`<a href="http://qq.com">文字</a>`, {enableHtml:true})
-        this.showToast()
     },
     methods:{
          showToast(){
