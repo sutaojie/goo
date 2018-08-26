@@ -36,10 +36,21 @@ new Vue({
     },
     mounted(){
         // this.$toast(`<a href="http://qq.com">文字</a>`, {enableHtml:true})
-        this.$toast('文字')
+        this.showToast()
     },
     methods:{
          showToast(){
+             this.$toast('余额不足，请及时充值!',{
+                 position:'bottom',
+                 enableHtml:false,
+                 closeButton:{
+                     text:'充值',
+                     callback(){
+                         console.log('充值成功')
+                     }
+                 },
+                 autoClose:false
+             })
         }
     }
 })
