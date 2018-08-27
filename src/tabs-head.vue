@@ -18,8 +18,10 @@
 </script>
 
 <style scoped lang="scss">
-    $tabs-height : 40px;
+    $tabs-height:40px;
     .tabs-head{
+        border: 1px solid red;
+        height: $tabs-height;
         display: flex;
         align-items: center;
         justify-content: flex-start;

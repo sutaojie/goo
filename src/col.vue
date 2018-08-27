@@ -83,7 +83,6 @@ let validator = (value)=>{
 <style lang="scss" scoped>
     .col{
         background: #ccc;
-        border: 1px solid red;
 
         height: 20px;
         $class-prefix:col-;
