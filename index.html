@@ -28,11 +28,24 @@
 </head>
 <body>
 <div id="app">
-    <button @click="showToast1">从顶部弹出 toast</button>
-    <br>
-    <button @click="showToast2">从中间弹出 toast</button>
-    <br>
-    <button @click="showToast3">从底部弹出 toast</button>
+    <g-tabs :selected.sync="selectedTab">
+        <g-tabs-head>
+           <template slot="actions">
+               <button>设置</button>
+           </template>
+            <g-tabs-item name="woman">
+                <g-icon name="settings"></g-icon>
+                美女
+            </g-tabs-item>
+            <g-tabs-item name="finance">财经</g-tabs-item>
+            <g-tabs-item name="sports">体育</g-tabs-item>
+        </g-tabs-head>
+        <g-tabs-body>
+            <g-tabs-pane name="woman">美女相关消息</g-tabs-pane>
+            <g-tabs-pane name="finance">财经相关消息</g-tabs-pane>
+            <g-tabs-pane name="sports">体育相关消息</g-tabs-pane>
+        </g-tabs-body>
+    </g-tabs>
 </div>
 <script src="./src/app.js"></script>
 </body>
