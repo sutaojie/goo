@@ -28,15 +28,17 @@
 <style scoped lang="scss">
     $tabs-height:40px;
     $line-bottom-color:blue;
+    $border-color:#ddd;
     .tabs-head{
-        border: 1px solid red;
         height: $tabs-height;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         position: relative;
+        border-bottom:1px solid $border-color;
        > .actions-wrapper{
            margin-left: auto;
+           padding-right: 1.5em;
        }
         > .line{
             position: absolute;
