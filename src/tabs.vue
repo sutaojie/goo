@@ -32,7 +32,15 @@
             }
         },
         mounted(){
-            this.eventHub.$emit('update:selected', this.selected)
+            this.$children.forEach((vm)=>{
+                if(vm.$options.name === 'TabsHead'){
+                    vm.$children.forEach((childVm)=>{
+                        if(childVm.$options.name === 'tabs-item' &&
+                            childVm.name === this.selected)
+                            this.eventHub.$emit('update:selected', this.selected, childVm)
+                    })
+                }
+            })
         }
     }
 </script>

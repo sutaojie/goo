@@ -31,13 +31,14 @@
         },
         methods:{
             xxx(){
-                this.eventHub.$emit('update:selected', this.name)
+                this.eventHub.$emit('update:selected', this.name, this)
             }
         }
     }
 </script>
 
 <style scoped lang="scss">
+    $active-font-color:blue;
     .tabs-item{
         flex-shrink:0;
         padding: 0 1em;
@@ -46,7 +47,8 @@
         display: flex;
         align-items: center;
         &.active{
-            background-color: red;
+            color:$active-font-color;
+            font-weight: bold;
         }
     }
 
