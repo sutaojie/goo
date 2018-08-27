@@ -17,6 +17,9 @@
         },
         mounted(){
             this.eventHub.$on('update:selected', (item, vm)=>{
+                let {width, height, top, left} = vm.$el.getBoundingClientRect()
+                this.$refs.line.style.width = `${width}px`
+                this.$refs.line.style.left = `${left}px`
             })
         }
     }
@@ -38,7 +41,7 @@
         > .line{
             position: absolute;
             bottom: 0;
-            width: 100px;
+            transition: all .3s;
             border-bottom: 1px solid $line-bottom-color;
         }
     }
