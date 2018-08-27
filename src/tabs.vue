@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     export default {
         name: "tabs",
         props:{
@@ -19,12 +20,24 @@
                     return ['horizontal', 'vertical'].indexOf(value) >= 0
                 }
             }
+        },
+        data(){
+          return{
+              eventHub:new Vue()
+          }
+        },
+        provide(){
+            return {
+                eventHub: this.eventHub
+            }
+        },
+        mounted(){
+            this.eventHub.$emit('update:selected', this.selected)
         }
     }
 </script>
 
 <style scoped lang="scss">
     .tabs{
-
     }
 </style>
