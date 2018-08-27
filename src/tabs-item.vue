@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item" :class="classes" @click="xxx">
+    <div class="tabs-item" :class="classes" @click="onClick">
         <slot></slot>
     </div>
 </template>
@@ -17,7 +17,11 @@
           name:{
               type:String|Number,
               required:true
-          }
+          },
+            disable:{
+              type:Boolean,
+                default:false
+            }
         },
         mounted(){
           this.eventHub.$on('update:selected', (name)=>{
@@ -26,11 +30,15 @@
         },
         computed:{
           classes(){
-              return { active: this.active}
+              return {
+                  active: this.active,
+                  disable:this.disable
+              }
           }
         },
         methods:{
-            xxx(){
+            onClick(){
+                if(this.disable) {return }
                 this.eventHub.$emit('update:selected', this.name, this)
             }
         }
@@ -39,6 +47,7 @@
 
 <style scoped lang="scss">
     $active-font-color:blue;
+    $disable-text-color: grey;
     .tabs-item{
         flex-shrink:0;
         padding: 0 1em;
@@ -49,6 +58,10 @@
         &.active{
             color:$active-font-color;
             font-weight: bold;
+        }
+        &.disable{
+            color: $disable-text-color;
+            cursor:not-allowed;
         }
     }
 
