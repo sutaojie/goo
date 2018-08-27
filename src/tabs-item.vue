@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item" :class="classes" @click="onClick">
+    <div class="tabs-item" :class="classes" @click="onClick" :data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -18,28 +18,31 @@
               type:String|Number,
               required:true
           },
-            disable:{
+            disabled:{
               type:Boolean,
                 default:false
             }
         },
-        mounted(){
-          this.eventHub.$on('update:selected', (name)=>{
-              this.active = this.name === name;
-          })
+        created(){
+            if(this.eventHub) {
+                this.eventHub.$on('update:selected', (name) => {
+                    this.active = this.name === name;
+                })
+            }
         },
         computed:{
           classes(){
               return {
                   active: this.active,
-                  disable:this.disable
+                  disabled:this.disabled
               }
           }
         },
         methods:{
             onClick(){
-                if(this.disable) {return }
-                this.eventHub.$emit('update:selected', this.name, this)
+                if(this.disabled) {return }
+                this.eventHub && this.eventHub.$emit('update:selected', this.name, this)
+                this.$emit('click', this)
             }
         }
     }
@@ -59,7 +62,7 @@
             color:$active-font-color;
             font-weight: bold;
         }
-        &.disable{
+        &.disabled{
             color: $disable-text-color;
             cursor:not-allowed;
         }
